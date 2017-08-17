@@ -5,24 +5,22 @@ section .data
 	msgChau: DB 'CHAU!!!!', 10
 	largoChau: EQU $ - msgChau
 
+section .bss
+	contador: RESB 1
 global _start
 section .text
 	_start:
-		push rbp ; D --> la direccion de memoria a la que apunta la pila no es multiplo de 16.
-		mov rbp, rsp
-		mov r8, 10 ; Inicializo mi contador
+		mov byte [contador], 10 ; Inicializo mi contador
 	.loop:
-		cmp r8, 0
+		cmp byte [contador], 0 ; While contador > 0 do
 		je .end
 		mov rax, 4
 		mov rbx, 1
 		mov rcx, msg
-		mov rdx, largo
-		push r8 ;A -->la direccion de memoria a la que apunta la pila ES multiplo de 16.
+		mov rdx, largo ; Print msg
 		int 0x80
 		dec byte [msg+largo - 2] ;modificar el numero y jmp a loop
-		pop r8
-		dec r8
+		dec byte [contador] ; contador--
 		jmp .loop
 	.end:
 		mov rax, 4
