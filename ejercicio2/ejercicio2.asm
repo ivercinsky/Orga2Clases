@@ -1,5 +1,5 @@
 section .data
-	msg: DB 'en 10 me voy ... 10',10
+	msg: DB 'en 10 me voy ... 9',10
 	largo: EQU $ - msg
 
 	msgChau: DB 'CHAU!!!!', 10
