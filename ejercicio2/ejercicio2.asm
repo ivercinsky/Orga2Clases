@@ -12,17 +12,19 @@ section .text
 		mov rbp, rsp
 		mov r8, 10 ; Inicializo mi contador
 	.loop:
-		cmp r8, 0
+		cmp r8, 0 ; While contador > 0 do
 		je .end
 		mov rax, 4
 		mov rbx, 1
 		mov rcx, msg
-		mov rdx, largo
+		mov rdx, largo ; Print MSG
 		push r8 ;A -->la direccion de memoria a la que apunta la pila ES multiplo de 16.
-		int 0x80
+		; pusheo r8 para que ningun otro proceso me modifique mi valor del contador. Ya que no es de la convencion C, con lo cual cualquiera puede modificarlo
+		;sin preservarlo.
+		int 0x80 ; Print MSG
 		dec byte [msg+largo - 2] ;modificar el numero y jmp a loop
-		pop r8
-		dec r8
+		pop r8 ; lo recupero de la pila
+		dec r8 ; contador--
 		jmp .loop
 	.end:
 		mov rax, 4
