@@ -8,9 +8,9 @@ section .data
 global _start
 section .text
 	_start:
-		push rbp ; D
+		push rbp ; D --> la direccion de memoria a la que apunta la pila no es multiplo de 16.
 		mov rbp, rsp
-		mov r8, 10
+		mov r8, 10 ; Inicializo mi contador
 	.loop:
 		cmp r8, 0
 		je .end
@@ -18,11 +18,9 @@ section .text
 		mov rbx, 1
 		mov rcx, msg
 		mov rdx, largo
-		push r8 ;D
-		sub rsp, 8 ;A
+		push r8 ;A -->la direccion de memoria a la que apunta la pila ES multiplo de 16.
 		int 0x80
 		dec byte [msg+largo - 2] ;modificar el numero y jmp a loop
-		add rsp, 8
 		pop r8
 		dec r8
 		jmp .loop
