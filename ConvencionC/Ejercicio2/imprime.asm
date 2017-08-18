@@ -1,7 +1,7 @@
 extern printf
 
 section .data
-	msg: DB 'Entero %d, Real %f, String %s', 10, 0
+	msg: DB 'Entero %d, Real %.3f, String %s', 10, 0
 	flt2: DQ 5.232
 global imprime
 
